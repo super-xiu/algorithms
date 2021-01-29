@@ -4,43 +4,43 @@ public class KnapsackProblem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] w = {1, 4, 3};//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		int[] val = {1500, 3000, 2000}; //ï¿½ï¿½Æ·ï¿½Ä¼ï¿½Öµ ï¿½ï¿½ï¿½ï¿½val[i] ï¿½ï¿½ï¿½ï¿½Ç°ï¿½æ½²ï¿½ï¿½v[i]
-		int m = 4; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		int n = val.length; //ï¿½ï¿½Æ·ï¿½Ä¸ï¿½ï¿½ï¿½
+		int[] w = {1, 4, 3};//ÎïÆ·µÄÖØÁ¿
+		int[] val = {1500, 3000, 2000}; //ÎïÆ·µÄ¼ÛÖµ ÕâÀïval[i] ¾ÍÊÇÇ°Ãæ½²µÄv[i]
+		int m = 4; //±³°üµÄÈÝÁ¿
+		int n = val.length; //ÎïÆ·µÄ¸öÊý
 		
 		
 		
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½é£¬
-		//v[i][j] ï¿½ï¿½Ê¾ï¿½ï¿½Ç°iï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü¹ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªjï¿½Ä±ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+		//´´½¨¶þÎ¬Êý×é£¬
+		//v[i][j] ±íÊ¾ÔÚÇ°i¸öÎïÆ·ÖÐÄÜ¹»×°ÈëÈÝÁ¿ÎªjµÄ±³°üÖÐµÄ×î´ó¼ÛÖµ
 		int[][] v = new int[n+1][m+1];
-		//Îªï¿½Ë¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
+		//ÎªÁË¼ÇÂ¼·ÅÈëÉÌÆ·µÄÇé¿ö£¬ÎÒÃÇ¶¨Ò»¸ö¶þÎ¬Êý×é
 		int[][] path = new int[n+1][m+1];
 		
-		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ÐºÍµï¿½Ò»ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ô²ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÄ¬ï¿½Ï¾ï¿½ï¿½ï¿½0
+		//³õÊ¼»¯µÚÒ»ÐÐºÍµÚÒ»ÁÐ, ÕâÀïÔÚ±¾³ÌÐòÖÐ£¬¿ÉÒÔ²»È¥´¦Àí£¬ÒòÎªÄ¬ÈÏ¾ÍÊÇ0
 		for(int i = 0; i < v.length; i++) {
-			v[i][0] = 0; //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
+			v[i][0] = 0; //½«µÚÒ»ÁÐÉèÖÃÎª0
 		}
 		for(int i=0; i < v[0].length; i++) {
-			v[0][i] = 0; //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0
+			v[0][i] = 0; //½«µÚÒ»ÐÐÉèÖÃ0
 		}
 		
 		
-		//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½æ»®ï¿½ï¿½ï¿½ï¿½
-		for(int i = 1; i < v.length; i++) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ iï¿½Ç´ï¿½1ï¿½ï¿½Ê¼ï¿½ï¿½
-			for(int j=1; j < v[0].length; j++) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½, jï¿½Ç´ï¿½1ï¿½ï¿½Ê¼ï¿½ï¿½
-				//ï¿½ï¿½Ê½
-				if(w[i-1]> j) { // ï¿½ï¿½Îªï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½i ï¿½Ç´ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Ê½ï¿½Ðµï¿½ w[i] ï¿½Þ¸Ä³ï¿½ w[i-1]
+		//¸ù¾ÝÇ°ÃæµÃµ½¹«Ê½À´¶¯Ì¬¹æ»®´¦Àí
+		for(int i = 1; i < v.length; i++) { //²»´¦ÀíµÚÒ»ÐÐ iÊÇ´Ó1¿ªÊ¼µÄ
+			for(int j=1; j < v[0].length; j++) {//²»´¦ÀíµÚÒ»ÁÐ, jÊÇ´Ó1¿ªÊ¼µÄ
+				//¹«Ê½
+				if(w[i-1]> j) { // ÒòÎªÎÒÃÇ³ÌÐòi ÊÇ´Ó1¿ªÊ¼µÄ£¬Òò´ËÔ­À´¹«Ê½ÖÐµÄ w[i] ÐÞ¸Ä³É w[i-1]
 					v[i][j]=v[i-1][j];
 				} else {
-					//Ëµï¿½ï¿½:
-					//ï¿½ï¿½Îªï¿½ï¿½ï¿½Çµï¿½i ï¿½ï¿½1ï¿½ï¿½Ê¼ï¿½Ä£ï¿½ ï¿½ï¿½Ë¹ï¿½Ê½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					//ËµÃ÷:
+					//ÒòÎªÎÒÃÇµÄi ´Ó1¿ªÊ¼µÄ£¬ Òò´Ë¹«Ê½ÐèÒªµ÷Õû³É
 					//v[i][j]=Math.max(v[i-1][j], val[i-1]+v[i-1][j-w[i-1]]);
 					//v[i][j] = Math.max(v[i - 1][j], val[i - 1] + v[i - 1][j - w[i - 1]]);
-					//Îªï¿½Ë¼ï¿½Â¼ï¿½ï¿½Æ·ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Ö±ï¿½Óµï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ÒªÊ¹ï¿½ï¿½if-elseï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½Ê½
+					//ÎªÁË¼ÇÂ¼ÉÌÆ·´æ·Åµ½±³°üµÄÇé¿ö£¬ÎÒÃÇ²»ÄÜÖ±½ÓµÄÊ¹ÓÃÉÏÃæµÄ¹«Ê½£¬ÐèÒªÊ¹ÓÃif-elseÀ´ÌåÏÖ¹«Ê½
 					if(v[i - 1][j] < val[i - 1] + v[i - 1][j - w[i - 1]]) {
 						v[i][j] = val[i - 1] + v[i - 1][j - w[i - 1]];
-						//ï¿½Ñµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½path
+						//°Ñµ±Ç°µÄÇé¿ö¼ÇÂ¼µ½path
 						path[i][j] = 1;
 					} else {
 						v[i][j] = v[i - 1][j];
@@ -50,7 +50,7 @@ public class KnapsackProblem {
 			}
 		}
 		
-		//ï¿½ï¿½ï¿½Ò»ï¿½ï¿½v ï¿½ï¿½ï¿½ï¿½Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½
+		//Êä³öÒ»ÏÂv ¿´¿´Ä¿Ç°µÄÇé¿ö
 		for(int i =0; i < v.length;i++) {
 			for(int j = 0; j < v[i].length;j++) {
 				System.out.print(v[i][j] + " ");
@@ -59,22 +59,22 @@ public class KnapsackProblem {
 		}
 		
 		System.out.println("============================");
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½Æ·
-		//ï¿½ï¿½ï¿½ï¿½path, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½, ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Òªï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
+		//Êä³ö×îºóÎÒÃÇÊÇ·ÅÈëµÄÄÄÐ©ÉÌÆ·
+		//±éÀúpath, ÕâÑùÊä³ö»á°ÑËùÓÐµÄ·ÅÈëÇé¿ö¶¼µÃµ½, ÆäÊµÎÒÃÇÖ»ÐèÒª×îºóµÄ·ÅÈë
 //		for(int i = 0; i < path.length; i++) {
 //			for(int j=0; j < path[i].length; j++) {
 //				if(path[i][j] == 1) {
-//					System.out.printf("ï¿½ï¿½%dï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½\n", i);
+//					System.out.printf("µÚ%d¸öÉÌÆ··ÅÈëµ½±³°ü\n", i);
 //				}
 //			}
 //		}
 		
-		//ï¿½ï¿½ï¿½Ô½ï¿½
-		int i = path.length - 1; //ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½
-		int j = path[0].length - 1;  //ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½
-		while(i > 0 && j > 0 ) { //ï¿½ï¿½pathï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+		//¶¯ÄÔ½î
+		int i = path.length - 1; //ÐÐµÄ×î´óÏÂ±ê
+		int j = path[0].length - 1;  //ÁÐµÄ×î´óÏÂ±ê
+		while(i > 0 && j > 0 ) { //´ÓpathµÄ×îºó¿ªÊ¼ÕÒ
 			if(path[i][j] == 1) {
-				System.out.printf("ï¿½ï¿½%dï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½\n", i); 
+				System.out.printf("µÚ%d¸öÉÌÆ··ÅÈëµ½±³°ü\n", i); 
 				j -= w[i-1]; //w[i-1]
 			}
 			i--;

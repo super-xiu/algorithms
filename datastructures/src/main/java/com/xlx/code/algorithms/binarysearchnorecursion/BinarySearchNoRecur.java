@@ -3,31 +3,31 @@ package com.xlx.code.algorithms.binarysearchnorecursion;
 public class BinarySearchNoRecur {
 
 	public static void main(String[] args) {
-		//ï¿½ï¿½ï¿½ï¿½
+		//²âÊÔ
 		int[] arr = {1,3, 8, 10, 11, 67, 100};
 		int index = binarySearch(arr, 100);
 		System.out.println("index=" + index);//
 	}
 	
-	//ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ÒµÄ·Çµİ¹ï¿½Êµï¿½ï¿½
+	//¶ş·Ö²éÕÒµÄ·Çµİ¹éÊµÏÖ
 	/**
 	 * 
-	 * @param arr ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½, arrï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	 * @param target ï¿½ï¿½Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
-	 * @return ï¿½ï¿½ï¿½Ø¶ï¿½Ó¦ï¿½Â±ê£¬-1ï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½Òµï¿½
+	 * @param arr ´ı²éÕÒµÄÊı×é, arrÊÇÉıĞòÅÅĞò
+	 * @param target ĞèÒª²éÕÒµÄÊı
+	 * @return ·µ»Ø¶ÔÓ¦ÏÂ±ê£¬-1±íÊ¾Ã»ÓĞÕÒµ½
 	 */
 	public static int binarySearch(int[] arr, int target) {
 		
 		int left = 0;
 		int right = arr.length - 1;
-		while(left <= right) { //Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(left <= right) { //ËµÃ÷¼ÌĞø²éÕÒ
 			int mid = (left + right) / 2;
 			if(arr[mid] == target) {
 				return mid;
 			} else if ( arr[mid] > target) {
-				right = mid - 1;//ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ß²ï¿½ï¿½ï¿½
+				right = mid - 1;//ĞèÒªÏò×ó±ß²éÕÒ
 			} else {
-				left = mid + 1; //ï¿½ï¿½Òªï¿½ï¿½ï¿½Ò±ß²ï¿½ï¿½ï¿½
+				left = mid + 1; //ĞèÒªÏòÓÒ±ß²éÕÒ
 			}
 		}
 		return -1;

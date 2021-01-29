@@ -1,18 +1,18 @@
-package com.xlx.code.algorithms.kmp;
+package com.atguigu.kmp;
 
 public class ViolenceMatch {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ã·¨
-		String str1 = "ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¹ï¿½ ï¿½Ğ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¹ï¿½ï¿½ï¿½ï¿½";
-		String str2 = "ï¿½Ğ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¹ï¿½ï¿½ï¿½~";
+		//²âÊÔ±©Á¦Æ¥ÅäËã·¨
+		String str1 = "¹è¹è¹È ÉĞ¹è¹ÈÄãÉĞ¹è ÉĞ¹è¹ÈÄãÉĞ¹è¹ÈÄãÉĞ¹èÄãºÃ";
+		String str2 = "ÉĞ¹è¹ÈÄãÉĞ¹èÄã~";
 		int index = violenceMatch(str1, str2);
 		System.out.println("index=" + index);
 
 	}
 
-	// ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ã·¨Êµï¿½ï¿½
+	// ±©Á¦Æ¥ÅäËã·¨ÊµÏÖ
 	public static int violenceMatch(String str1, String str2) {
 		char[] s1 = str1.toCharArray();
 		char[] s2 = str2.toCharArray();
@@ -20,21 +20,21 @@ public class ViolenceMatch {
 		int s1Len = s1.length;
 		int s2Len = s2.length;
 
-		int i = 0; // iï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½s1
-		int j = 0; // jï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½s2
-		while (i < s1Len && j < s2Len) {// ï¿½ï¿½Ö¤Æ¥ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½
+		int i = 0; // iË÷ÒıÖ¸Ïòs1
+		int j = 0; // jË÷ÒıÖ¸Ïòs2
+		while (i < s1Len && j < s2Len) {// ±£Ö¤Æ¥ÅäÊ±£¬²»Ô½½ç
 
-			if(s1[i] == s2[j]) {//Æ¥ï¿½ï¿½ok
+			if(s1[i] == s2[j]) {//Æ¥Åäok
 				i++;
 				j++;
-			} else { //Ã»ï¿½ï¿½Æ¥ï¿½ï¿½É¹ï¿½
-				//ï¿½ï¿½ï¿½Ê§ï¿½ä£¨ï¿½ï¿½str1[i]! = str2[j]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½i = i - (j - 1)ï¿½ï¿½j = 0ï¿½ï¿½
+			} else { //Ã»ÓĞÆ¥Åä³É¹¦
+				//Èç¹ûÊ§Åä£¨¼´str1[i]! = str2[j]£©£¬Áîi = i - (j - 1)£¬j = 0¡£
 				i = i - (j - 1);
 				j = 0;
 			}
 		}
 		
-		//ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½Æ¥ï¿½ï¿½É¹ï¿½
+		//ÅĞ¶ÏÊÇ·ñÆ¥Åä³É¹¦
 		if(j == s2Len) {
 			return i - j;
 		} else {

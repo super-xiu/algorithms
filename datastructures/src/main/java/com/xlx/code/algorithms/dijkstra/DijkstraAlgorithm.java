@@ -6,9 +6,9 @@ public class DijkstraAlgorithm {
 
 	public static void main(String[] args) {
 		char[] vertex = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
-		//ï¿½Ú½Ó¾ï¿½ï¿½ï¿½
+		//ÁÚ½Ó¾ØÕó
 		int[][] matrix = new int[vertex.length][vertex.length];
-		final int N = 65535;// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		final int N = 65535;// ±íÊ¾²»¿ÉÒÔÁ¬½Ó
 		matrix[0]=new int[]{N,5,7,N,N,N,2};  
         matrix[1]=new int[]{5,N,N,9,N,N,3};  
         matrix[2]=new int[]{7,N,N,N,8,N,N};  
@@ -16,11 +16,11 @@ public class DijkstraAlgorithm {
         matrix[4]=new int[]{N,N,8,N,N,5,4};  
         matrix[5]=new int[]{N,N,N,4,5,N,6};  
         matrix[6]=new int[]{2,3,N,N,4,6,N};
-        //ï¿½ï¿½ï¿½ï¿½ Graphï¿½ï¿½ï¿½ï¿½
+        //´´½¨ Graph¶ÔÏó
         Graph graph = new Graph(vertex, matrix);
-        //ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ú½Ó¾ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ok
+        //²âÊÔ, ¿´¿´Í¼µÄÁÚ½Ó¾ØÕóÊÇ·ñok
         graph.showGraph();
-        //ï¿½ï¿½ï¿½ÔµÏ½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+        //²âÊÔµÏ½ÜË¹ÌØÀ­Ëã·¨
         graph.dsj(2);//C
         graph.showDijkstra();
         
@@ -30,96 +30,96 @@ public class DijkstraAlgorithm {
 }
 
 class Graph {
-	private char[] vertex; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private int[][] matrix; // ï¿½Ú½Ó¾ï¿½ï¿½ï¿½
-	private VisitedVertex vv; //ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ÊµÄ¶ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+	private char[] vertex; // ¶¥µãÊý×é
+	private int[][] matrix; // ÁÚ½Ó¾ØÕó
+	private VisitedVertex vv; //ÒÑ¾­·ÃÎÊµÄ¶¥µãµÄ¼¯ºÏ
 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ¹¹ÔìÆ÷
 	public Graph(char[] vertex, int[][] matrix) {
 		this.vertex = vertex;
 		this.matrix = matrix;
 	}
 	
-	//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+	//ÏÔÊ¾½á¹û
 	public void showDijkstra() {
 		vv.show();
 	}
 
-	// ï¿½ï¿½Ê¾Í¼
+	// ÏÔÊ¾Í¼
 	public void showGraph() {
 		for (int[] link : matrix) {
 			System.out.println(Arrays.toString(link));
 		}
 	}
 	
-	//ï¿½Ï½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨Êµï¿½ï¿½
+	//µÏ½ÜË¹ÌØÀ­Ëã·¨ÊµÏÖ
 	/**
 	 * 
-	 * @param index ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Â±ï¿½
+	 * @param index ±íÊ¾³ö·¢¶¥µã¶ÔÓ¦µÄÏÂ±ê
 	 */
 	public void dsj(int index) {
 		vv = new VisitedVertex(vertex.length, index);
-		update(index);//ï¿½ï¿½ï¿½ï¿½indexï¿½ï¿½ï¿½ãµ½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		update(index);//¸üÐÂindex¶¥µãµ½ÖÜÎ§¶¥µãµÄ¾àÀëºÍÇ°Çý¶¥µã
 		for(int j = 1; j <vertex.length; j++) {
-			index = vv.updateArr();// Ñ¡ï¿½ñ²¢·ï¿½ï¿½ï¿½ï¿½ÂµÄ·ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½
-			update(index); // ï¿½ï¿½ï¿½ï¿½indexï¿½ï¿½ï¿½ãµ½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			index = vv.updateArr();// Ñ¡Ôñ²¢·µ»ØÐÂµÄ·ÃÎÊ¶¥µã
+			update(index); // ¸üÐÂindex¶¥µãµ½ÖÜÎ§¶¥µãµÄ¾àÀëºÍÇ°Çý¶¥µã
 		} 
 	}
 	
 	
 	
-	//ï¿½ï¿½ï¿½ï¿½indexï¿½Â±ê¶¥ï¿½ãµ½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,
+	//¸üÐÂindexÏÂ±ê¶¥µãµ½ÖÜÎ§¶¥µãµÄ¾àÀëºÍÖÜÎ§¶¥µãµÄÇ°Çý¶¥µã,
 	private void update(int index) {
 		int len = 0;
-		//ï¿½ï¿½ï¿½Ý±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½Ú½Ó¾ï¿½ï¿½ï¿½ï¿½  matrix[index]ï¿½ï¿½
+		//¸ù¾Ý±éÀúÎÒÃÇµÄÁÚ½Ó¾ØÕóµÄ  matrix[index]ÐÐ
 		for(int j = 0; j < matrix[index].length; j++) {
-			// len ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ãµ½indexï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ + ï¿½ï¿½indexï¿½ï¿½ï¿½ãµ½jï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½Äºï¿½ 
+			// len º¬ÒåÊÇ : ³ö·¢¶¥µãµ½index¶¥µãµÄ¾àÀë + ´Óindex¶¥µãµ½j¶¥µãµÄ¾àÀëµÄºÍ 
 			len = vv.getDis(index) + matrix[index][j];
-			// ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ len Ð¡ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ãµ½jï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
+			// Èç¹ûj¶¥µãÃ»ÓÐ±»·ÃÎÊ¹ý£¬²¢ÇÒ len Ð¡ÓÚ³ö·¢¶¥µãµ½j¶¥µãµÄ¾àÀë£¬¾ÍÐèÒª¸üÐÂ
 			if(!vv.in(j) && len < vv.getDis(j)) {
-				vv.updatePre(j, index); //ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Îªindexï¿½ï¿½ï¿½ï¿½
-				vv.updateDis(j, len); //ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ãµ½jï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
+				vv.updatePre(j, index); //¸üÐÂj¶¥µãµÄÇ°ÇýÎªindex¶¥µã
+				vv.updateDis(j, len); //¸üÐÂ³ö·¢¶¥µãµ½j¶¥µãµÄ¾àÀë
 			}
 		}
 	}
 }
 
-// ï¿½Ñ·ï¿½ï¿½Ê¶ï¿½ï¿½ã¼¯ï¿½ï¿½
+// ÒÑ·ÃÎÊ¶¥µã¼¯ºÏ
 class VisitedVertex {
-	// ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê¹ï¿½ 1ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ê¹ï¿½,0Î´ï¿½ï¿½ï¿½ï¿½,ï¿½á¶¯Ì¬ï¿½ï¿½ï¿½ï¿½
+	// ¼ÇÂ¼¸÷¸ö¶¥µãÊÇ·ñ·ÃÎÊ¹ý 1±íÊ¾·ÃÎÊ¹ý,0Î´·ÃÎÊ,»á¶¯Ì¬¸üÐÂ
 	public int[] already_arr;
-	// Ã¿ï¿½ï¿½ï¿½Â±ï¿½ï¿½Ó¦ï¿½ï¿½ÖµÎªÇ°Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½, ï¿½á¶¯Ì¬ï¿½ï¿½ï¿½ï¿½
+	// Ã¿¸öÏÂ±ê¶ÔÓ¦µÄÖµÎªÇ°Ò»¸ö¶¥µãÏÂ±ê, »á¶¯Ì¬¸üÐÂ
 	public int[] pre_visited;
-	// ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ãµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½GÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½Í»ï¿½ï¿½Â¼Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ë£¬ï¿½á¶¯Ì¬ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½Í»ï¿½ï¿½Åµï¿½dis
+	// ¼ÇÂ¼³ö·¢¶¥µãµ½ÆäËûËùÓÐ¶¥µãµÄ¾àÀë,±ÈÈçGÎª³ö·¢¶¥µã£¬¾Í»á¼ÇÂ¼Gµ½ÆäËü¶¥µãµÄ¾àÀë£¬»á¶¯Ì¬¸üÐÂ£¬ÇóµÄ×î¶Ì¾àÀë¾Í»á´æ·Åµ½dis
 	public int[] dis;
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//¹¹ÔìÆ÷
 	/**
 	 * 
-	 * @param length :ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ 
-	 * @param index: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Â±ï¿½, ï¿½ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½ã£¬ï¿½Â±ï¿½ï¿½ï¿½ï¿½6
+	 * @param length :±íÊ¾¶¥µãµÄ¸öÊý 
+	 * @param index: ³ö·¢¶¥µã¶ÔÓ¦µÄÏÂ±ê, ±ÈÈçG¶¥µã£¬ÏÂ±ê¾ÍÊÇ6
 	 */
 	public VisitedVertex(int length, int index) {
 		this.already_arr = new int[length];
 		this.pre_visited = new int[length];
 		this.dis = new int[length];
-		//ï¿½ï¿½Ê¼ï¿½ï¿½ disï¿½ï¿½ï¿½ï¿½
+		//³õÊ¼»¯ disÊý×é
 		Arrays.fill(dis, 65535);
-		this.already_arr[index] = 1; //ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã±»ï¿½ï¿½ï¿½Ê¹ï¿½
-		this.dis[index] = 0;//ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Îª0
+		this.already_arr[index] = 1; //ÉèÖÃ³ö·¢¶¥µã±»·ÃÎÊ¹ý
+		this.dis[index] = 0;//ÉèÖÃ³ö·¢¶¥µãµÄ·ÃÎÊ¾àÀëÎª0
 				
 	}
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½: ï¿½Ð¶ï¿½indexï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ±»·ï¿½ï¿½Ê¹ï¿½
+	 * ¹¦ÄÜ: ÅÐ¶Ïindex¶¥µãÊÇ·ñ±»·ÃÎÊ¹ý
 	 * @param index
-	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½true, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½false
+	 * @return Èç¹û·ÃÎÊ¹ý£¬¾Í·µ»Øtrue, ·ñÔò·ÃÎÊfalse
 	 */
 	public boolean in(int index) {
 		return already_arr[index] == 1;
 	}
 	
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ãµ½indexï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
+	 * ¹¦ÄÜ: ¸üÐÂ³ö·¢¶¥µãµ½index¶¥µãµÄ¾àÀë
 	 * @param index
 	 * @param len
 	 */
@@ -127,7 +127,7 @@ class VisitedVertex {
 		dis[index] = len;
 	}
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½preï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªindexï¿½ï¿½ï¿½ï¿½
+	 * ¹¦ÄÜ: ¸üÐÂpreÕâ¸ö¶¥µãµÄÇ°Çý¶¥µãÎªindex¶¥µã
 	 * @param pre
 	 * @param index
 	 */
@@ -135,7 +135,7 @@ class VisitedVertex {
 		pre_visited[pre] = index;
 	}
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ãµ½indexï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
+	 * ¹¦ÄÜ:·µ»Ø³ö·¢¶¥µãµ½index¶¥µãµÄ¾àÀë
 	 * @param index
 	 */
 	public int getDis(int index) {
@@ -144,7 +144,7 @@ class VisitedVertex {
 	
 	
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ñ²¢·ï¿½ï¿½ï¿½ï¿½ÂµÄ·ï¿½ï¿½Ê¶ï¿½ï¿½ã£¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½G ï¿½ï¿½ó£¬¾ï¿½ï¿½ï¿½ Aï¿½ï¿½ï¿½ï¿½Îªï¿½ÂµÄ·ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½(×¢ï¿½â²»ï¿½Ç³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	 * ¼ÌÐøÑ¡Ôñ²¢·µ»ØÐÂµÄ·ÃÎÊ¶¥µã£¬ ±ÈÈçÕâÀïµÄG Íêºó£¬¾ÍÊÇ Aµã×÷ÎªÐÂµÄ·ÃÎÊ¶¥µã(×¢Òâ²»ÊÇ³ö·¢¶¥µã)
 	 * @return
 	 */
 	public int updateArr() {
@@ -155,32 +155,32 @@ class VisitedVertex {
 				index = i;
 			}
 		}
-		//ï¿½ï¿½ï¿½ï¿½ index ï¿½ï¿½ï¿½ã±»ï¿½ï¿½ï¿½Ê¹ï¿½
+		//¸üÐÂ index ¶¥µã±»·ÃÎÊ¹ý
 		already_arr[index] = 1;
 		return index;
 	}
 	
-	//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ä½ï¿½ï¿½
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ÏÔÊ¾×îºóµÄ½á¹û
+	//¼´½«Èý¸öÊý×éµÄÇé¿öÊä³ö
 	public void show() {
 		
 		System.out.println("==========================");
-		//ï¿½ï¿½ï¿½already_arr
+		//Êä³öalready_arr
 		for(int i : already_arr) {
 			System.out.print(i + " ");
 		}
 		System.out.println();
-		//ï¿½ï¿½ï¿½pre_visited
+		//Êä³öpre_visited
 		for(int i : pre_visited) {
 			System.out.print(i + " ");
 		}
 		System.out.println();
-		//ï¿½ï¿½ï¿½dis
+		//Êä³ödis
 		for(int i : dis) {
 			System.out.print(i + " ");
 		}
 		System.out.println();
-		//Îªï¿½ËºÃ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½
+		//ÎªÁËºÃ¿´×îºóµÄ×î¶Ì¾àÀë£¬ÎÒÃÇ´¦Àí
 		char[] vertex = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
 		int count = 0;
 		for (int i : dis) {
